@@ -20,15 +20,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int player2points;
     private TextView texviewplayer1;
     private TextView textViewplayer2;
+    private  MediaPlayer background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        background = MediaPlayer.create(MainActivity.this,R.raw.bob_marley_buffalo);
+        background.setLooping(true);
+        background.start();
 
-      // MediaPlayer player = MediaPlayer.create(this, DEFAULT_RINGTONE_URI);
-       // player.setLooping(true);
-       // player.start();
+
 
         texviewplayer1=findViewById(R.id.text_view_p1);
         textViewplayer2=findViewById(R.id.text_view_p2);
@@ -161,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         player2points = 0;
         updatePointstext();
         resetBoard();
+    }
+    public void onPause() {
+       super.onPause();
+       background.release();
+        finish();
     }
 
 
